@@ -176,7 +176,7 @@
                     <img class="img-fluid" src="assets/img/roomway.png">
                     <h3 class="name" style="color: #f8f8f8;">Roomway.in&nbsp;<a href="https://roomway.in"><i class="fa fa-link" style="color: rgb(255,255,255);"></i></a></h3>
                     <p class="description" style="color: #f8f8f8;">
-                       Designed, developed and deployed a social network that allows people to easily and effectively find new roommates or flatmates
+                       Designed, developed and deployed a social network that allows people to easily and effectively find new roommates or flatmates based on 
                     </p>
                  </div>
                <div class="col-sm-6 col-lg-4 item" data-aos="zoom-in" style="color: rgb(255,255,255);">
@@ -197,9 +197,14 @@
                   <p class="description" style="color: #f8f8f8;">A java based game where you have to navigate to the end of the maze. It contains many game modes to choose from, and multiple options to play with</p>
                </div>
                <div class="col-sm-6 col-lg-4 item" data-aos="zoom-in">
+                  <img class="img-fluid" src="assets/img/hal_mimic_2.gif">
+                  <h3 class="name" style="color: #f8f8f8;">HAL-Mimic 2.0&nbsp;<a href="https://github.com/Utkichaps/HAL-Mimic-2.0"><i class="fa fa-github" style="color: #f8f8f8;"></i></a></h3>
+                  <p class="description" style="color: #f8f8f8;">An improvement over my previous chatbot, this one uses an encoder-decoder architecture along with an attention layer to provide more accurate responses based on your Whatsapp data</p>
+               </div>
+               <div class="col-sm-6 col-lg-4 item" data-aos="zoom-in">
                   <img class="img-fluid" src="assets/img/chatbot.png">
-                  <h3 class="name" style="color: #f8f8f8;">AI Chatbot&nbsp;<a href="https://github.com/Utkichaps/Chatbot"><i class="fa fa-github" style="color: #f8f8f8;"></i></a></h3>
-                  <p class="description" style="color: #f8f8f8;">A chatbot that trains itself on your Whatsapp chat history and learns to reply as you would reply in a text conversation</p>
+                  <h3 class="name" style="color: #f8f8f8;">HAL-Mimic&nbsp;<a href="https://github.com/Utkichaps/HAL-Mimic"><i class="fa fa-github" style="color: #f8f8f8;"></i></a></h3>
+                  <p class="description" style="color: #f8f8f8;">A chatbot that trains itself on your Whatsapp chat history and learns to reply as you would reply in a text conversation. The model uses two bi-directional LSTMs</p>
                </div>
                <div class="col-sm-6 col-lg-4 item" data-aos="zoom-in">
                   <img class="img-fluid" src="assets/img/stonks.png">
@@ -412,8 +417,7 @@
           .type("Check out my projects below!", {delay: 2000})          
         const firstline = new TypeIt("#first", {            
             speed: 60,
-            startDelay: 2000,            
-            cursor: false,
+            startDelay: 2000,                        
             afterComplete: async (instance) => {
                 secondline.go()
               },

@@ -96,6 +96,14 @@
 .navigation-clean.navbar-dark .dropdown-menu .dropdown-item:focus, .navigation-clean.navbar-dark .dropdown-menu .dropdown-item:hover {
     background: #363739;
 }
+.heading-text {
+    padding: 20px 10px 15px 10px;
+    max-width: 700px;
+    text-align: justify;
+
+    margin-left: auto;
+    margin-right: auto;
+}
 .navbar.navbar-light.navbar-expand-md.navigation-clean {
     position: fixed;
     z-index: 1;
@@ -105,7 +113,7 @@
     background-color: #fff;
 }
 .projects-clean p {
-    color: #7d8285;
+    color: #f8f8f8;
 }
 .projects-clean h2 {
     font-weight: 700;

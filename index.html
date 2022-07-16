@@ -44,6 +44,9 @@
             font-weight: 500;
             font-size: 18px;
          }
+         .period {
+            color: #f8f8f8
+         }
          .skill-icon {
             margin: 0px 4px 4px 4px;            
             height: 20px;
@@ -155,7 +158,7 @@
      </nav>
       <!-- <section id="profile" style="height: auto;text-align: center;padding-top: 111px;padding-bottom: 176px;background: url(&quot;assets/img/backgroundweb.png&quot;) top / cover no-repeat;"> -->
         <div class="projects-clean" id="profile" style="background: #181818;padding-top: 98px;padding-bottom: 38px; text-align:center;">        
-         <img data-aos="fade-up" data-aos-delay="50" src="assets/img/circle-cropped%20(1).png" style="font-size: 16px;height: 196px;" />
+         <img src="assets/img/circle-cropped%20(1).png" class="main-picture" />
         <div class="heading-text">
          <p>Hi there! <b>Utkarsh Chhapekar</b> here.</p>
          <p>
@@ -172,28 +175,32 @@
         </div>
 
          <div class="row" style="height: auto;padding-top: 0px;">
-            <div class="col" data-aos="fade-up" data-aos-delay="150"><a href="https://github.com/Utkichaps"><i class="fab fa-github" style="font-size: 34px;border-color: rgb(0,0,0);color: #f8f8f8;"></i></a><a href="https://www.linkedin.com/in/utkarsh-c/" style="margin-left: 30px;"><i class="fab fa-linkedin" style="font-size: 34px;color: #f8f8f8;"></i></a></div>
+            <div class="col">
+               <a href="https://github.com/Utkichaps">
+                  <i class="fab fa-github" style="font-size: 34px;border-color: rgb(0,0,0);color: #f8f8f8;"></i>
+               </a>
+               <a href="https://www.linkedin.com/in/utkarsh-c/" style="margin-left: 30px;">
+                  <i class="fab fa-linkedin" style="font-size: 34px;color: #f8f8f8;"></i>
+               </a>
+            </div>
          </div>
          </div>
       <!-- </section> -->
-      <section style="text-align: center;padding: 39px;padding-top: 75px;padding-bottom: 75px;padding-right: 0px;padding-left: 0px;background: #f8f8f8;">
-         <h1 style="padding-bottom: 6px;font-size: 56px;">Resume<br></h1>
-         <p style="font-size: 18px;">If you're looking for a formal resume, you can email me at <a href = "mailto: utkarshchhapekar@outlook.com">utkarshchhapekar@outlook.com</a></p>
-      </section>
+      <section style="padding-top: 30px;background: #f8f8f8;"></section>
       <div id="projects" class="projects-clean" style="background: #181818;padding-top: 64px;padding-bottom: 38px;">
          <div class="container" style="text-align: center;">
             <div class="intro">
                <h1 style="padding-top: 0px;padding-bottom: 0px;color: #f8f8f8;font-size: 56px;">Projects</h1>
             </div>
             <div class="row projects">
-                <div class="col-sm-6 col-lg-4 item" data-aos="zoom-in" style="color: rgb(255,255,255);">
+                <div class="col-sm-6 col-lg-4 item" style="color: rgb(255,255,255);">
                     <img class="img-fluid" src="assets/img/roomway.png">
                     <h3 class="name" style="color: #f8f8f8;">Roomway.in&nbsp;<a href="https://roomway.in"><i class="fa fa-link" style="color: rgb(255,255,255);"></i></a></h3>
                     <p class="description" style="color: #f8f8f8;">
-                       Designed, developed and deployed a social network that allows people to easily and effectively find new roommates or flatmates through a personality based recommendation system
+                      A social network that allows people to easily and effectively find new roommates or flatmates through a personality based recommendation system. Developed using Django, Postgres, Redis and Celery
                     </p>
                  </div>
-               <div class="col-sm-6 col-lg-4 item" data-aos="zoom-in" style="color: rgb(255,255,255);">
+               <div class="col-sm-6 col-lg-4 item" style="color: rgb(255,255,255);">
                   <img class="img-fluid" src="assets/img/voting-system.gif">
                   <h3 class="name" style="color: #f8f8f8;">Voting System&nbsp;
                      <a href="https://www.espublisher.com/journals/articledetails/585">
@@ -204,82 +211,85 @@
                      </a>                     
                   </h3>
                   <p class="description" style="color: #f8f8f8;">
-                     An application which uses facial detection to ensure fraud free and secure voting. Made for the publication - Coercion Resistant Remote Electronic Voting, Engineered Science
+                     An android application which uses facial detection to ensure fraud free and secure voting. Made for the publication - Coercion Resistant Remote Electronic Voting, Engineered Science
                   </p>
                </div>
-               <div class="col-sm-6 col-lg-4 item" data-aos="zoom-in" style="color: rgb(255,255,255);">
+               <div class="col-sm-6 col-lg-4 item" style="color: rgb(255,255,255);">
                   <img class="img-fluid" src="assets/img/disastron.png">
                   <h3 class="name" style="color: #f8f8f8;">Disastron&nbsp;<a href="https://github.com/Utkichaps/Disastron"><i class="fa fa-github" style="color: rgb(255,255,255);"></i></a></h3>
-                  <p class="description" style="color: #f8f8f8;">A crowd sourced disaster management application which contains real time weather maps and disaster alerts</p>
+                  <p class="description" style="color: #f8f8f8;">A crowd sourced disaster management application which provides real time weather maps through the OpenWeather API and notifications through the National Disaster Management Authority of India.</p>
                </div>
-               <div class="col-sm-6 col-lg-4 item" data-aos="zoom-in">
+               <div class="col-sm-6 col-lg-4 item">
                   <img class="img-fluid" src="assets/img/mazeduks.gif">
                   <h3 class="name" style="color: #f8f8f8;">Maze DUKS&nbsp;<a href="https://github.com/Utkichaps/Maze-DUKS" style="color: rgb(0,0,0);"><i class="fa fa-github" style="color: #f8f8f8;"></i></a></h3>
-                  <p class="description" style="color: #f8f8f8;">A java based game where you have to navigate to the end of the maze. It contains many game modes to choose from, and multiple options to play with</p>
+                  <p class="description" style="color: #f8f8f8;">A Java based video game where you have to navigate to the end of the maze. It contains many game modes to choose from, and multiple options to play with</p>
                </div>
-               <div class="col-sm-6 col-lg-4 item" data-aos="zoom-in">
+               <div class="col-sm-6 col-lg-4 item">
                   <img class="img-fluid" src="assets/img/hal_mimic_2.gif">
                   <h3 class="name" style="color: #f8f8f8;">HAL-Mimic 2.0&nbsp;<a href="https://github.com/Utkichaps/HAL-Mimic-2.0"><i class="fa fa-github" style="color: #f8f8f8;"></i></a></h3>
                   <p class="description" style="color: #f8f8f8;">An improvement over my previous chatbot, this one uses an encoder-decoder architecture along with an attention layer to provide more accurate responses based on your Whatsapp data</p>
                </div>
-               <div class="col-sm-6 col-lg-4 item" data-aos="zoom-in">
+               <div class="col-sm-6 col-lg-4 item">
                   <img class="img-fluid" src="assets/img/chatbot.png">
                   <h3 class="name" style="color: #f8f8f8;">HAL-Mimic&nbsp;<a href="https://github.com/Utkichaps/HAL-Mimic"><i class="fa fa-github" style="color: #f8f8f8;"></i></a></h3>
                   <p class="description" style="color: #f8f8f8;">A chatbot that trains itself on your Whatsapp chat history and learns to reply as you would reply in a text conversation. The model uses two bi-directional LSTMs</p>
                </div>
-               <div class="col-sm-6 col-lg-4 item" data-aos="zoom-in">
+               <div class="col-sm-6 col-lg-4 item">
                   <img class="img-fluid" src="assets/img/stonks.png">
                   <h3 class="name" style="color: #f8f8f8;">Stonks&nbsp;<a href="https://github.com/Utkichaps/Stonks"><i class="fa fa-github" style="color: #f8f8f8;"></i></a></h3>
-                  <p class="description" style="color: #f8f8f8;">An application that uses a combination of methods to predict stock market prices on a given day</p>
+                  <p class="description" style="color: #f8f8f8;">An application that combines the use of Twitter sentiment analysis and time series data prediction to forecast stock market prices on a given day</p>
                </div>
-               <div class="col-sm-6 col-lg-4 item" data-aos="zoom-in">
+               <div class="col-sm-6 col-lg-4 item">
                   <img class="img-fluid" src="assets/img/Alzheimer%27s.png">
                   <h3 class="name" style="color: #f8f8f8;">Alzheimer's Prediction<a href="https://github.com/Utkichaps/Stonks"></a></h3>
-                  <p class="description" style="color: #f8f8f8;">Worked on an implementation of a paper that uses multi-modal neural networks to predict the progression of Alzheimer's disease in patients</p>
+                  <p class="description" style="color: #f8f8f8;">Implementation of a paper published in the Nature journal that uses multi-modal neural networks to predict the progression of Alzheimer's disease in patients</p>
                </div>
             </div>
          </div>
       </div>
-      <section id="experience" style="text-align: center;padding-top: 55px;margin: 11px;margin-right: 11px;padding-bottom: 45px;">
+      <section style="padding-top: 30px;background: #f8f8f8;"></section>
+      <section id="experience" style="background-color:#181818;text-align: center;padding-top: 55px;">
          <div class="education group" style="text-align: center;">
             <div class="heading">
-               <h2 class="text-center" style="font-size: 56px;padding-bottom: 41px;padding-top: 8px;">Experience</h2>
+               <h2 class="text-center" style="color: #f8f8f8;font-size: 56px;padding-bottom: 41px;padding-top: 8px;">Experience</h2>
             </div>
-            <div class="item" style="margin-top: 30px;">
-               <div class="row" style="max-width: 1600px;margin-right: auto;margin-left: auto;margin-bottom: 34px;border-bottom-width: 1px;border-bottom-style: solid;padding-bottom: 24px;">
-                  <div class="col-md-6" data-aos="zoom-in-right">
+            <div class="item" style="margin-top: 30px;padding-bottom: 2px;">
+               <div class="row company-header">
+                  <div class="col-md-6">
                      <img src="assets/img/deloitte.png" style="height: 80px;">
                      <h3>Deloitte</h3>
                      <h1 style="font-size: 18px;">Analyst</h1>
                   </div>
-                  <div class="col-md-6" data-aos="zoom-in-left" style="padding-top: 6px;margin: auto;"><span class="period" style="padding-top: 0px;">Jan 2021 - Present</span></div>
+                  <div class="col-md-6" style="padding-top: 6px;margin: auto;"><span class="period" style="padding-top: 0px;">Jan 2021 - July 2022<br><br></span></div>
                </div>
+               <p class="experience-text">Designed and developed production level e-commerce and customer management websites using ReactJS and NodeJS for a top telecom client in the United States. Awarded the "Applause Award" for exceptional performance in a project through weekly deliverables and client demos. Collaborated on an application development effort for a client that reduced prepaid cellular activation times to 5 minutes and improved their play store ratings to 4.5 stars<br></p>
             </div>
-            <div class="item" style="margin-top: 30px;border-bottom-width: 1px;border-bottom-style: solid;padding-bottom: 24px;">
-               <div class="row" style="max-width: 1600px;margin-right: auto;margin-left: auto;">
-                  <div class="col-md-6" data-aos="zoom-in-right">
+            <div class="item" style="margin-top: 30px;padding-bottom: 2px;">
+               <div class="row company-header">
+                  <div class="col-md-6">
                      <img src="assets/img/Bolologo.png" style="height: 80px;">
                      <h3>BoloMeet</h3>
                      <h1 style="font-size: 18px;">Data Science Intern</h1>
                   </div>
-                  <div class="col-md-6" data-aos="zoom-in-left" style="padding-top: 6px;margin: auto;"><span class="period" style="padding-top: 0px;"><br>June 2020 - July 2020<br><br></span></div>
+                  <div class="col-md-6" style="padding-top: 6px;margin: auto;"><span class="period" style="padding-top: 0px;">June 2020 - July 2020<br><br></span></div>
                </div>
-               <p class="text-muted" data-aos="fade" style="max-width: 964px;margin-right: auto;margin-left: auto;border-bottom-style: none;">Developed a feature for the video conferencing application BoloMeet, wherein the minutes of the meeting and action points are automatically generated at the end of a meeting by using speech to text APIs, then leveraged natural language processing techniques to accurately identify relevant information and filter the raw speech to text data<br></p>
+               <p class="experience-text">Developed a feature for the video conferencing application BoloMeet, wherein the minutes of the meeting and action points are automatically generated at the end of a meeting by using speech to text APIs, then leveraged natural language processing techniques to accurately identify relevant information and filter the raw speech to text data<br></p>
             </div>
             <div class="item" style="margin-top: 30px;">
-               <div class="row" style="max-width: 1600px;margin-right: auto;margin-left: auto;">
-                  <div class="col-md-6" data-aos="zoom-in-right">
+               <div class="row company-header">
+                  <div class="col-md-6">
                      <img src="assets/img/virtual%20labs.png" style="height: 80px;">
                      <h3>Virtual Labs, IIITH</h3>
                      <h1 style="font-size: 18px;">Software development Intern</h1>
                   </div>
-                  <div class="col-md-6" data-aos="zoom-in-left" style="padding-top: 6px;margin: auto;"><span class="period" style="padding-top: 0px;">May 2019 - July 2019</span></div>
+                  <div class="col-md-6" style="padding-top: 6px;margin: auto;"><span class="period" style="padding-top: 0px;">May 2019 - July 2019<br><br></span></div>
                </div>
-               <p class="text-muted" data-aos="fade" style="max-width: 964px;margin-right: auto;margin-left: auto;">Contributed to the development of open source software in Virtual Labs under mentorship from the Institute. Virtual Labs is an initiative by the MHRD, Government of India, which provides remote access to engineering labs for students. I collaborated with other interns and developed the UI for a circuit and waveform simulator<br><br></p>
+               <p class="experience-text no-border-bottom">Contributed to the development of open source software in Virtual Labs under mentorship from the Institute. Virtual Labs is an initiative by the MHRD, Government of India, which provides remote access to engineering labs for students. I collaborated with other interns and developed the UI for a circuit and waveform simulator<br><br></p>
             </div>
          </div>
       </section>
-      <section id="skills" style="text-align: center;padding-top: 79px;background: #181818;padding-bottom: 34px;">
+      <section style="padding-top: 30px;background: #f8f8f8;"></section>
+      <section id="skills" style="text-align: center;padding-top: 64px;background: #181818;padding-bottom: 34px;">
          <h1 style="padding-bottom: 37px;color: #f8f8f8;font-size: 56px;">Skills</h1>
          <div class="row" style="margin-right: auto;margin-left: auto;margin-bottom: 27px;">
             <div class="col" style="min-width: 280px;">
@@ -368,65 +378,67 @@
             </div>
          </div>      
       </section>
-      <section id="education" style="text-align: center;padding-top: 51px;margin: 11px;margin-right: 11px;padding-bottom: 67px;background: #f8f8f8;">
+      <section style="padding-top: 30px;background: #f8f8f8;"></section>
+      <section id="education" style="text-align: center;padding-top: 60px;padding-bottom: 30px;background: #181818;">
          <div class="education group" style="text-align: center;">
             <div class="heading">
-               <h2 class="text-center" style="font-size: 56px;padding-bottom: 49px;padding-top: 9px;">Education</h2>
+               <h2 class="text-center" style="font-size: 56px;padding-bottom: 49px;padding-top: 9px;color: #f8f8f8">Education</h2>
             </div>
-            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 1600px;border: 1px none rgba(0,0,0,0.55);border-bottom: 1px solid rgb(146,146,146);padding-top: 1px;padding-bottom: 25px;">
-               <div class="col-md-6" data-aos="zoom-in-right" style="max-width: 600px;margin: auto;">
+            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 900px;border: 1px none rgba(0,0,0,0.55);border-bottom: 1px solid #f8f8f8;padding-top: 1px;padding-bottom: 25px;">
+               <div class="col-md-6" style="max-width: 600px;margin: auto;">
                   <img src="assets/img/Manipal_University_logo.png" style="height: 80px;">
-                  <h3>Manipal Institute Of Technology</h3>
-                  <p style="text-align: center;">B.Tech - Computers and Communication Engineering<br>CGPA : 9.14<br></p>
+                  <h3 style="color: #f8f8f8">Manipal Institute Of Technology</h3>
+                  <p style="text-align: center; color: #f8f8f8">B.Tech - Computers and Communication Engineering<br>CGPA : 9.14<br></p>
                </div>
-               <div class="col-md-6" data-aos="zoom-in-left" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period">2021</span></div>
+               <div class="col-md-6" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period">2021</span></div>
             </div>
-            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 1600px;border-width: 1px;border-style: none;border-bottom-width: 1px;border-bottom-style: solid;padding-bottom: 25px;">
-               <div class="col-md-6" data-aos="zoom-in-right" style="max-width: 600px;margin: auto;padding-top: 25px;padding-bottom: 25px;">
+            <div class="row" style="margin-left: auto;padding-top: 25px;margin-right: auto;max-width: 900px;border-width: 1px;border-style: none;border-bottom: 1px solid #f8f8f8;padding-bottom: 25px;">
+               <div class="col-md-6" style="max-width: 600px;margin: auto;">
                   <img src="assets/img/Deeksha.png" style="height: 80px;">
-                  <h3>Deeksha Integrated PU College</h3>
-                  <p style="text-align: center;">12th - PCM and Computer Science<br>Percentage - 93.5%</p>
+                  <h3 style="color: #f8f8f8">Deeksha Integrated PU College</h3>
+                  <p style="text-align: center; color: #f8f8f8">12th - PCM and Computer Science<br>Percentage - 93.5%</p>
                </div>
-               <div class="col-md-6" data-aos="zoom-in-left" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period">2017</span></div>
+               <div class="col-md-6" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period">2017</span></div>
             </div>
-            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 1600px;border-width: 1px;border-style: none;padding-top: 25px;">
-               <div class="col-md-6" data-aos="zoom-in-right" style="max-width: 600px;margin: auto;">
+            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 900px;border-width: 1px;border-style: none;padding-top: 25px;">
+               <div class="col-md-6" style="max-width: 600px;margin: auto;">
                   <img src="assets/img/Bethany.png" style="height: 80px;">
-                  <h3>Bethany High School</h3>
-                  <p style="text-align: center;">10th - PCM and Computer Science<br>Percentage - 90.5%</p>
+                  <h3 style="color: #f8f8f8">Bethany High School</h3>
+                  <p style="text-align: center; color: #f8f8f8">10th - PCM and Computer Science<br>Percentage - 90.5%</p>
                </div>
-               <div class="col-md-6" data-aos="zoom-in-left" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period">2015</span></div>
+               <div class="col-md-6" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period">2015</span></div>
             </div>
          </div>
       </section>
-      <section id="extracur" style="text-align: center;padding-top: 30px;margin: 11px;margin-right: 11px;background: #181818;padding-bottom: 44px;">
+      <section style="padding-top: 30px;background: #f8f8f8;"></section>
+      <section id="extracur" style="text-align: center;padding-top: 30px;background: #181818;padding-bottom: 30px;">
          <div class="education group" style="text-align: center;">
             <div class="heading">
                <h2 class="text-center" style="font-size: 56px;padding-bottom: 46px;color: #f8f8f8;padding-top: 36px;width: auto;">Extracurricular</h2>
             </div>
-            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 1600px;padding-bottom: 25px;border: 1px none #f8f8f8 ;border-bottom-style: solid;">
-               <div class="col-md-6" data-aos="zoom-in-right" style="max-width: 600px;margin: auto;">
+            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 900px;padding-bottom: 25px;border: 1px none #f8f8f8 ;border-bottom-style: solid;">
+               <div class="col-md-6" style="max-width: 600px;margin: auto;">
                   <h3 style="color: #f8f8f8;">Vice President,<br>The Astronomy Club</h3>
                </div>
-               <div class="col-md-6" data-aos="zoom-in-left" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period" style="color: #f8f8f8;">2017 - 2020</span></div>
+               <div class="col-md-6" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period" style="color: #f8f8f8;">2017 - 2020</span></div>
             </div>
-            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 1600px;padding-top: 25px;padding-bottom: 25px;border: 1px none #f8f8f8 ;border-bottom-style: solid;">
-               <div class="col-md-6" data-aos="zoom-in-right" style="max-width: 600px;margin: auto;">
+            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 900px;padding-top: 25px;padding-bottom: 25px;border: 1px none #f8f8f8 ;border-bottom-style: solid;">
+               <div class="col-md-6" style="max-width: 600px;margin: auto;">
                   <h3 style="border-color: #f8f8f8;color: #f8f8f8;">Actor,<br>Naqaab Filmmaking</h3>
                </div>
-               <div class="col-md-6" data-aos="zoom-in-left" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period" style="color: #f8f8f8;">2018 - 2019</span></div>
+               <div class="col-md-6" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period" style="color: #f8f8f8;">2018 - 2019</span></div>
             </div>
-            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 1600px;padding-top: 25px;padding-bottom: 25px;border: 1px none #f8f8f8 ;border-bottom-style: solid;">
-               <div class="col-md-6" data-aos="zoom-in-right" style="max-width: 600px;margin: auto;">
+            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 900px;padding-top: 25px;padding-bottom: 25px;border: 1px none #f8f8f8 ;border-bottom-style: solid;">
+               <div class="col-md-6" style="max-width: 600px;margin: auto;">
                   <h3 style="color: #f8f8f8;">Management Committee,<br>IEEE Student Body</h3>
                </div>
-               <div class="col-md-6" data-aos="zoom-in-left" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period" style="color: #f8f8f8;">2018 - 2019</span></div>
+               <div class="col-md-6" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period" style="color: #f8f8f8;">2018 - 2019</span></div>
             </div>
-            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 1600px;border-width: 1px;border-style: none;padding-top: 25px;padding-bottom: 25px;">
-               <div class="col-md-6" data-aos="zoom-in-right" style="max-width: 600px;margin: auto;">
+            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 900px;border-width: 1px;border-style: none;padding-top: 25px;padding-bottom: 25px;">
+               <div class="col-md-6" style="max-width: 600px;margin: auto;">
                   <h3 style="color: #f8f8f8;">President,<br>Deeksha Integrated PU College</h3>
                </div>
-               <div class="col-md-6" data-aos="zoom-in-left" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period" style="color: #f8f8f8;">2015 - 2016</span></div>
+               <div class="col-md-6" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period" style="color: #f8f8f8;">2015 - 2016</span></div>
             </div>
          </div>
       </section>
@@ -434,7 +446,7 @@
          <h1 style="font-size: 56px;padding-top: 0px;text-align: center;">Contact</h1>
          <p style="font-size: 20px;color: rgb(0,0,0);text-align: center;">utkarshchhapekar@outlook.com&nbsp;<a href="mailto: utkarshchhapekar@outlook.com"><i class="fa fa-envelope" style="color: rgb(0,0,0);"></i></a><br>Utkarsh Chhapekar&nbsp;<a href="https://www.facebook.com/utkarsh.chhapekar.9/"><i class="fa fa-facebook-square"></i></a><br>utkichaps&nbsp;<a href="https://www.instagram.com/utkichaps/" style="color: rgb(227,41,119);"><i class="fa fa-instagram"></i></a></p>
       </section>
-      <p style="text-align: center;font-size: 13px;">Designed by <strong>Utkarsh Chhapekar</strong>&nbsp;<i class="fab fa-rebel" style="font-size: 19px;margin-left: 2px;"></i></p>
+      <p style="text-align: center;font-size: 13px;"><i class="fab fa-rebel" style="font-size: 19px;margin-left: 2px;"></i></p>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>      

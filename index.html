@@ -1,482 +1,836 @@
 <!DOCTYPE html>
-<html style="height: auto;">
-   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-      <title>Portfolio</title>
-      <meta name="description" content="This is Utkarsh Chhapekar's portfolio website.">
-      <link rel="icon" type="image/png" sizes="588x585" href="assets/img/favicon.png">
-      <link rel="icon" type="image/png" sizes="588x585" href="assets/img/favicon.png">
-      <link rel="icon" type="image/png" sizes="588x585" href="assets/img/favicon.png">
-      <link rel="icon" type="image/png" sizes="588x585" href="assets/img/favicon.png">
-      <link rel="icon" type="image/png" sizes="588x585" href="assets/img/favicon.png">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">      
-      <link rel="stylesheet" href="assets/css/styles.min.css">
-      <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
-      <style>
-         html,body {
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Utkarsh Chhapekar</title>
+   <meta name="description" content="Utkarsh Chhapekar's portfolio website.">
+   <link rel="icon" type="image/png" href="assets/img/favicon.png">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1M346NBEX3"></script>
+   <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-1M346NBEX3');
+   </script>
+   <style>
+      :root {
+         --bg: #05070b;
+         --fg: #e8edf2;
+         --muted: #8b97a5;
+         --accent: #f2f5f8;
+         --panel: rgba(11, 15, 21, 0.82);
+         --line: rgba(255, 255, 255, 0.09);
+         --intro-w: 440px;
+         --panel-w: 420px;
+         --ease: cubic-bezier(.2, .8, .2, 1);
+      }
+      * { box-sizing: border-box; }
+      html, body {
+         margin: 0;
+         height: 100%;
+         background: var(--bg);
+         color: var(--fg);
+         font-family: 'Space Grotesk', system-ui, sans-serif;
+         overflow: hidden;
+      }
+      button { font: inherit; color: inherit; }
+      .mono { font-family: 'JetBrains Mono', monospace; }
+      .kicker {
+         font-family: 'JetBrains Mono', monospace;
+         color: var(--accent);
+         font-size: 12.5px;
+         letter-spacing: .1em;
+         text-transform: uppercase;
+      }
+
+      #stage { position: fixed; inset: 0; }
+      #stage canvas { display: block; touch-action: none; }
+
+      /* Intro */
+      .intro {
+         position: fixed;
+         left: 0; top: 0; bottom: 0;
+         width: var(--intro-w);
+         padding: 48px 44px;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         gap: 18px;
+         z-index: 2;
+         background: linear-gradient(90deg, rgba(5,7,11,.94) 55%, rgba(5,7,11,0));
+         pointer-events: none;
+         transition: transform .7s var(--ease), opacity .5s;
+      }
+      .intro > * { pointer-events: auto; }
+      body.exploring .intro { transform: translateX(-60px); opacity: 0; pointer-events: none; }
+      body.exploring .intro > * { pointer-events: none; }
+      .face {
+         width: 116px; height: 116px;
+         border-radius: 50%;
+         border: 2px solid var(--accent);
+         box-shadow: 0 0 36px rgba(255, 255, 255, .18);
+      }
+      .intro h1 { font-size: 40px; margin: 0; font-weight: 700; letter-spacing: -.02em; line-height: 1.1; }
+      .intro p { color: #c3ccd6; line-height: 1.62; margin: 0; font-size: 15.5px; }
+      .intro-actions { display: flex; align-items: center; gap: 22px; margin-top: 6px; }
+      .socials a { color: var(--fg); font-size: 21px; margin-right: 16px; opacity: .75; transition: .2s; }
+      .socials a:hover { opacity: 1; color: var(--accent); }
+      .cta {
+         background: transparent;
+         border: 1px solid var(--accent);
+         color: var(--accent);
+         border-radius: 999px;
+         padding: 10px 18px;
+         cursor: pointer;
+         font-family: 'JetBrains Mono', monospace;
+         font-size: 13px;
+         transition: .2s;
+      }
+      .cta:hover { background: var(--accent); color: var(--bg); }
+
+      /* Node labels */
+      #labels { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+      .label {
+         position: absolute; left: 0; top: 0;
+         background: rgba(5, 7, 11, .55);
+         border: 1px solid var(--line);
+         border-radius: 6px;
+         padding: 4px 8px;
+         font-family: 'JetBrains Mono', monospace;
+         font-size: 12px;
+         white-space: nowrap;
+         cursor: pointer;
+         transition: border-color .2s, color .2s;
+         will-change: transform, opacity;
+      }
+      .label .idx { color: var(--accent); margin-right: 6px; }
+      .label.hot { border-color: var(--accent); color: #fff; }
+
+      /* Project panel */
+      .panel {
+         position: fixed;
+         right: 24px; top: 24px; bottom: 24px;
+         width: var(--panel-w);
+         background: var(--panel);
+         backdrop-filter: blur(14px);
+         -webkit-backdrop-filter: blur(14px);
+         border: 1px solid var(--line);
+         border-radius: 18px;
+         padding: 22px;
+         display: flex;
+         flex-direction: column;
+         gap: 14px;
+         overflow-y: auto;
+         z-index: 3;
+         transform: translateX(calc(100% + 40px));
+         transition: transform .6s var(--ease);
+      }
+      body.exploring .panel { transform: none; }
+      .panel-top { display: flex; justify-content: space-between; align-items: center; }
+      .icon-btn {
+         background: none; border: 1px solid var(--line); border-radius: 8px;
+         width: 32px; height: 32px; cursor: pointer; color: var(--muted); transition: .2s;
+      }
+      .icon-btn:hover { color: var(--fg); border-color: var(--accent); }
+      .panel img {
+         width: 100%;
+         aspect-ratio: 16 / 10;
+         object-fit: contain;
+         background: #0b0f14;
+         border-radius: 10px;
+         border: 1px solid var(--line);
+      }
+      .panel h2 { margin: 0; font-size: 28px; letter-spacing: -.01em; }
+      .bits { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); word-break: break-all; line-height: 1.5; }
+      .bits b { color: var(--accent); font-weight: 600; }
+      .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+      .tag {
+         font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+         border: 1px solid rgba(255, 255, 255, .3); color: var(--accent);
+         padding: 3px 8px; border-radius: 999px;
+      }
+      .panel p { margin: 0; line-height: 1.62; color: #c3ccd6; font-size: 15px; }
+      .links { display: flex; gap: 10px; flex-wrap: wrap; }
+      .links a {
+         color: var(--fg); text-decoration: none; font-size: 14px;
+         border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; transition: .2s;
+      }
+      .links a:hover { border-color: var(--accent); color: var(--accent); }
+      .links a i { margin-right: 6px; }
+      .pnav { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-top: 6px; }
+      .pnav button {
+         background: none; border: 1px solid var(--line); border-radius: 10px;
+         padding: 10px 12px; cursor: pointer; text-align: left; transition: .2s;
+      }
+      .pnav button:last-child { text-align: right; }
+      .pnav button:hover { border-color: var(--accent); }
+      .pnav small { display: block; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-bottom: 2px; }
+
+      /* Top bar & hint */
+      .topbar { position: fixed; top: 22px; right: 28px; z-index: 2; display: flex; gap: 10px; transition: opacity .3s; }
+      body.exploring .topbar { opacity: 0; pointer-events: none; }
+      .pill {
+         background: rgba(5, 7, 11, .6); border: 1px solid var(--line); border-radius: 999px;
+         padding: 8px 14px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; transition: .2s;
+      }
+      .pill:hover { border-color: var(--accent); color: var(--accent); }
+      .back { position: fixed; top: 22px; left: 28px; z-index: 2; opacity: 0; pointer-events: none; transition: opacity .4s .2s; }
+      body.exploring .back { opacity: 1; pointer-events: auto; }
+      .hint {
+         position: fixed; bottom: 22px; left: var(--intro-w); right: 0;
+         text-align: center; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 12px;
+         z-index: 1; pointer-events: none; transition: left .7s var(--ease), right .7s var(--ease);
+      }
+      body.exploring .hint { left: 0; right: calc(var(--panel-w) + 48px); }
+      .hint kbd { border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; color: var(--fg); }
+
+      /* All projects grid */
+      .grid-overlay {
+         position: fixed; inset: 0; z-index: 5;
+         background: rgba(5, 7, 11, .9); backdrop-filter: blur(10px);
+         overflow-y: auto; padding: 60px 40px;
+         opacity: 0; pointer-events: none; transition: opacity .35s;
+      }
+      .grid-overlay.open { opacity: 1; pointer-events: auto; }
+      .grid-inner { max-width: 1100px; margin: 0 auto; }
+      .grid-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+      .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+      .card {
+         background: #0b0f14; border: 1px solid var(--line); border-radius: 14px; padding: 14px;
+         cursor: pointer; text-align: left; transition: .2s;
+      }
+      .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+      .card img { width: 100%; aspect-ratio: 16 / 10; object-fit: contain; background: #070a0e; border-radius: 8px; }
+      .card h3 { margin: 10px 0 4px; font-size: 18px; }
+      .card span { color: var(--muted); font-size: 12.5px; font-family: 'JetBrains Mono', monospace; }
+
+      /* Mobile: intro becomes a full-width scrollable page, project panel becomes a bottom sheet */
+      @media (max-width: 760px) {
+         .intro {
             width: 100%;
-            height: 100%;
-            margin: 0px;
-            padding: 0px;
-            overflow-x: hidden; 
+            padding: 84px 28px 40px;
+            justify-content: flex-start;
+            overflow-y: auto;
+            background: rgba(5, 7, 11, .8);
+            pointer-events: auto;
          }
-         .flash-text {
-            color: #f8f8f8 !important; 
-            font-size: 18px; 
-            margin-bottom: 1px
-         }         
-        .nav-icon {
-            margin-right: 5px;
-            font-size: 18px;
-        }
-        .nav-icon-small {
-            margin-right: 5px;
-        }
-        .nav-bell {
-            margin-left: auto;
-        }
-        .nav-link-head {
-            font-weight: 500;
-            font-size: 18px;
-         }
-         .period {
-            color: #f8f8f8
-         }
-         .skill-icon {
-            margin: 0px 4px 4px 4px;            
-            height: 20px;
-         }    
-        @media only screen and (max-width: 995px) {
-            .nav-link-head {
-                display: none;
-            }       
-    
-            .nav-bell {
-                margin-left: 0%;
-            }
-    
-            .nav-link-small {
-                padding: 8px 3px 8px 3px !important;            
-            }
-    
-            .navbar-brand {
-                margin-right: 0%;
-            }
-    
-            .nav-icon {
-                font-size: 20px;
-                margin-right: 40px;
-            }        
-    
-        }
-        @media only screen and (max-width: 500px) {
-         .nav-icon {            
-            margin-right: 20px;
-        }
-        }
-        @media only screen and (max-width: 350px) {
-         .nav-icon {            
-            margin-right: 15px;
-        }
-        }
-           
-      </style>
-   </head>
-   <body style="height: auto;">
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-           <!-- Google tag (gtag.js) -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1M346NBEX3"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+         .face { width: 96px; height: 96px; }
+         .intro h1 { font-size: 34px; }
+         .intro p { font-size: 15px; }
+         .intro-actions { flex-wrap: wrap; gap: 18px; }
+         .topbar { top: 16px; right: 16px; }
+         .back { top: 12px; left: 16px; }
+         .hint { display: none; }
+         .label { font-size: 11px; padding: 3px 6px; }
 
-        gtag('config', 'G-1M346NBEX3');
-      </script>  
-      <nav class="navbar navbar-light navbar-expand-md navigation-clean fixed-top" style="background: #f8f8f8;max-height: 72px;">
-         <div class="container" style="width: auto;">
-            <ul class="navbar-nav">
-               <li class="nav-item">
-                     <a class="nav-link-small nav-link" id="profbutton" href="#" style="color:#181818;">
-                        <i class="fas fa-sort-up nav-icon"></i>                        
-                     </a>
-               </li>                     
-            </ul>                          
-            <ul class="navbar-nav">
-               <li class="nav-item">
-                     <a class="nav-link-small nav-link" id="prjbutton" href="#" style="color:#181818;">
-                        <i class="fas fa-tools nav-icon"></i>
-                        <span class="nav-link-head">Projects</span>
-                     </a>
-               </li>                     
-            </ul>
-            <ul class="navbar-nav">
-               <li class="nav-item">
-                     <a class="nav-link-small nav-link" id="expbutton" href="#" style="color:#181818;">
-                        <i class="fas fa-suitcase nav-icon"></i>
-                        <span class="nav-link-head">Experience</span>
-                     </a>
-               </li>                     
-            </ul>                                                                                                                            
-            <ul class="navbar-nav">
-               <li class="nav-item">
-                     <a class="nav-link-small nav-link" id="skbutton" href="#" style="color:#181818;">
-                        <i class="fas fa-cogs nav-icon"></i>
-                        <span class="nav-link-head">Skills</span>
-                     </a>
-               </li>                     
-            </ul>   
-            <ul class="navbar-nav">
-               <li class="nav-item">
-                     <a class="nav-link-small nav-link" id="edbutton" href="#" style="color:#181818;">
-                        <i class="fas fa-graduation-cap nav-icon"></i>
-                        <span class="nav-link-head">Education</span>
-                     </a>
-               </li>                     
-            </ul>  
-            <ul class="navbar-nav">
-               <li class="nav-item">
-                     <a class="nav-link-small nav-link" id="exbutton" href="#" style="color:#181818;">
-                        <i class="fas fa-award nav-icon"></i>
-                        <span class="nav-link-head">Extracurricular</span>
-                     </a>
-               </li>                     
-            </ul>
-            <ul class="navbar-nav">
-               <li class="nav-item">
-                     <a class="nav-link-small nav-link" id="cntbutton" href="#" style="color:#181818;">
-                        <i class="fas fa-phone-square-alt nav-icon"></i>
-                        <span class="nav-link-head">Contact</span>
-                     </a>
-               </li>                     
-            </ul> 
-         </div>
-     </nav>
-      <!-- <section id="profile" style="height: auto;text-align: center;padding-top: 111px;padding-bottom: 176px;background: url(&quot;assets/img/backgroundweb.png&quot;) top / cover no-repeat;"> -->
-        <div class="projects-clean" id="profile" style="background: #181818;padding-top: 98px;padding-bottom: 38px; text-align:center;">        
-         <img src="assets/img/circle-cropped%20(1).png" class="main-picture" />
-        <div class="heading-text">
-         <p>Hello there! <b>Utkarsh Chhapekar</b> here.</p>         
-         <p>
-            I have over a year of experience in building lean and scalable websites using React and Node with various use cases, including E-Commerce, 
-            Customer Resource Management, and Portals. I also have a go at projects in Computer Vision and NLP by 
-            implementing ideas that come to mind.
-         </p>
-         <p>
-            Currently I'm a CS grad student at the University of California - Irvine, and love building novel products with a visible impact 
-            on people who use them. 
-            Besides this, I partake in observational astronomy, hiking, and annoying my cat.
-         </p>
-         <p>Check out my projects below!</p>
-        </div>
+         .panel {
+            left: 10px; right: 10px; bottom: 10px; top: auto;
+            width: auto;
+            max-height: 58vh;
+            padding: 16px;
+            gap: 10px;
+            border-radius: 16px;
+            transform: translateY(calc(100% + 30px));
+         }
+         .panel img { aspect-ratio: auto; height: 20vh; }
+         .panel h2 { font-size: 22px; }
+         .panel p { font-size: 14px; }
+         .pnav button { padding: 8px 10px; font-size: 14px; }
 
-         <div class="row" style="height: auto;padding-top: 0px;">
-            <div class="col">
-               <a href="https://github.com/Utkichaps">
-                  <i class="fab fa-github" style="font-size: 34px;border-color: rgb(0,0,0);color: #f8f8f8;"></i>
-               </a>
-               <a href="https://www.linkedin.com/in/utkarsh-c/" style="margin-left: 30px;">
-                  <i class="fab fa-linkedin" style="font-size: 34px;color: #f8f8f8;"></i>
-               </a>
-            </div>
-         </div>
-         </div>
-      <!-- </section> -->
-      <section class="empty-section"></section>
-      <div id="projects" class="projects-clean" style="background: #181818;padding-top: 64px;padding-bottom: 38px;">
-         <div class="container" style="text-align: center;">
-            <div class="intro">
-               <h1 style="padding-top: 0px;padding-bottom: 0px;color: #f8f8f8;font-size: 56px;">Projects</h1>
-            </div>
-            <div class="row projects">      
-               <div class="col-sm-6 col-lg-4 item" style="color: rgb(255,255,255);">
-                  <img class="img-fluid" src="assets/img/rhain.png">
-                  <h3 class="name" style="color: #f8f8f8;">Project RHAIN&nbsp;
-                     <a href="https://projectrhain.com">
-                        <i class="fa fa-link" style="color: rgb(255,255,255);"></i>
-                     </a>
-                     <a href="https://github.com/orgs/Project-RHAIN/repositories">
-                        <i class="fa fa-github" style="color: rgb(255,255,255);"></i>
-                     </a>                     
-                  </h3>
-                  <p class="description" style="color: #f8f8f8;">
-                     An intelligent healthcare analytics platform that leverages machine learning and statistical techniques to provide actionable insights and metrics for county health evaluation, aiming to improve healthcare policy decision-making and reduce wasteful expenditure.
-                  </p>
-               </div>          
-               <div class="col-sm-6 col-lg-4 item" style="color: rgb(255,255,255);">
-                  <img class="img-fluid" src="assets/img/voting-system.gif">
-                  <h3 class="name" style="color: #f8f8f8;">Voting System&nbsp;
-                     <a href="https://www.espublisher.com/journals/articledetails/585">
-                        <i class="fa fa-link" style="color: rgb(255,255,255);"></i>
-                     </a>
-                     <a href="https://github.com/Utkichaps/Voting-System">
-                        <i class="fa fa-github" style="color: rgb(255,255,255);"></i>
-                     </a>                     
-                  </h3>
-                  <p class="description" style="color: #f8f8f8;">
-                     An android application which uses facial detection to ensure fraud free and secure voting. Made for the publication - Coercion Resistant Remote Electronic Voting, Engineered Science
-                  </p>
-               </div>
-               <div class="col-sm-6 col-lg-4 item" style="color: rgb(255,255,255);">
-                  <img class="img-fluid" src="assets/img/disastron.png">
-                  <h3 class="name" style="color: #f8f8f8;">Disastron&nbsp;<a href="https://github.com/Utkichaps/Disastron"><i class="fa fa-github" style="color: rgb(255,255,255);"></i></a></h3>
-                  <p class="description" style="color: #f8f8f8;">A crowd sourced disaster management application which provides real time weather maps through the OpenWeather API and notifications through the National Disaster Management Authority of India.</p>
-               </div>
-               <div class="col-sm-6 col-lg-4 item">
-                  <img class="img-fluid" src="assets/img/mazeduks.gif">
-                  <h3 class="name" style="color: #f8f8f8;">Maze DUKS&nbsp;<a href="https://github.com/Utkichaps/Maze-DUKS" style="color: rgb(0,0,0);"><i class="fa fa-github" style="color: #f8f8f8;"></i></a></h3>
-                  <p class="description" style="color: #f8f8f8;">A Java based video game where you have to navigate to the end of the maze. It contains many game modes to choose from, and multiple options to play with</p>
-               </div>
-               <div class="col-sm-6 col-lg-4 item">
-                  <img class="img-fluid" src="assets/img/hal_mimic_2.gif">
-                  <h3 class="name" style="color: #f8f8f8;">HAL-Mimic 2.0&nbsp;<a href="https://github.com/Utkichaps/HAL-Mimic-2.0"><i class="fa fa-github" style="color: #f8f8f8;"></i></a></h3>
-                  <p class="description" style="color: #f8f8f8;">An improvement over my previous chatbot, this one uses an encoder-decoder architecture along with an attention layer to provide more accurate responses based on your Whatsapp data</p>
-               </div>
-               <div class="col-sm-6 col-lg-4 item">
-                  <img class="img-fluid" src="assets/img/chatbot.png">
-                  <h3 class="name" style="color: #f8f8f8;">HAL-Mimic&nbsp;<a href="https://github.com/Utkichaps/HAL-Mimic"><i class="fa fa-github" style="color: #f8f8f8;"></i></a></h3>
-                  <p class="description" style="color: #f8f8f8;">A chatbot that trains itself on your Whatsapp chat history and learns to reply as you would reply in a text conversation. The model uses two bi-directional LSTMs</p>
-               </div>
-               <div class="col-sm-6 col-lg-4 item" style="color: rgb(255,255,255);">
-                    <img class="img-fluid" src="assets/img/roomway.png">
-                    <h3 class="name" style="color: #f8f8f8;">Roomway&nbsp;</h3>
-                    <p class="description" style="color: #f8f8f8;">
-                      A social network that allows people to easily and effectively find new roommates or flatmates through a personality based recommendation system. Developed using Django, Postgres, Redis and Celery
-                    </p>
-                 </div>
-               <div class="col-sm-6 col-lg-4 item">
-                  <img class="img-fluid" src="assets/img/stonks.png">
-                  <h3 class="name" style="color: #f8f8f8;">Stonks&nbsp;<a href="https://github.com/Utkichaps/Stonks"><i class="fa fa-github" style="color: #f8f8f8;"></i></a></h3>
-                  <p class="description" style="color: #f8f8f8;">An application that combines the use of Twitter sentiment analysis and time series data prediction to forecast stock market prices on a given day</p>
-               </div>               
-               <div class="col-sm-6 col-lg-4 item">
-                  <img class="img-fluid" src="assets/img/Alzheimer%27s.png">
-                  <h3 class="name" style="color: #f8f8f8;">Alzheimer's Prediction<a href="https://github.com/Utkichaps/Stonks"></a></h3>
-                  <p class="description" style="color: #f8f8f8;">Implementation of a paper published in the Nature journal that uses multi-modal neural networks to predict the progression of Alzheimer's disease in patients</p>
-               </div>
-            </div>
+         .grid-overlay { padding: 28px 16px; }
+         .cards { grid-template-columns: 1fr 1fr; gap: 10px; }
+         .card { padding: 8px; }
+         .card h3 { font-size: 14px; }
+         .card span { display: none; }
+      }
+   </style>
+</head>
+<body>
+   <div id="stage"></div>
+   <div id="labels"></div>
+
+   <aside class="intro">
+      <img class="face" src="assets/img/circle-cropped%20(1).png" alt="Utkarsh Chhapekar">
+      <div class="kicker">// hello there</div>
+      <h1>Utkarsh Chhapekar</h1>
+      <p>
+         I have over 3 years of experience building scalable and reliable systems - from healthcare software used by
+         thousands of hospitals, to ecommerce pages that handle millions of requests a minute. I’m eager to learn,
+         adapt quickly, and above all, I love building software.
+      </p>
+      <p>I also have a go at side projects in Computer Vision and NLP.</p>
+      <p>Besides this, I partake in observational astronomy, a lot of hiking, and annoying my cat.</p>
+      <div class="intro-actions">
+         <button class="cta" id="explore">Explore projects →</button>
+         <div class="socials">
+            <a href="https://github.com/Utkichaps" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/utkarsh-c/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:utkarshchhapekar@outlook.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
          </div>
       </div>
-      <section class="empty-section"></section>
-      <section id="experience" style="background-color:#181818;text-align: center;padding-top: 55px;">
-         <div class="education group" style="text-align: center;">
-            <div class="heading">
-               <h2 class="text-center" style="color: #f8f8f8;font-size: 56px;padding-bottom: 41px;padding-top: 8px;">Experience</h2>
-            </div>
-            <div class="item" style="margin-top: 30px;padding-bottom: 2px;">
-               <div class="row company-header">
-                  <div class="col-md-6">
-                     <img src="assets/img/amazon.jpg" style="height: 80px;">
-                     <h3>Amazon</h3>
-                     <h1 style="font-size: 18px;">SDE Intern</h1>
-                  </div>
-                  <div class="col-md-6" style="padding-top: 6px;margin: auto;"><span class="period" style="padding-top: 0px;">June 2023 - September 2023<br><br></span></div>
-               </div>
-               <p class="experience-text">Currently working with the Alexa Mobile Application Development Team<br></p>
-            </div>
-            <div class="item" style="margin-top: 30px;padding-bottom: 2px;">
-               <div class="row company-header">
-                  <div class="col-md-6">
-                     <img src="assets/img/deloitte.png" style="height: 80px;">
-                     <h3>Deloitte</h3>
-                     <h1 style="font-size: 18px;">Analyst</h1>
-                  </div>
-                  <div class="col-md-6" style="padding-top: 6px;margin: auto;"><span class="period" style="padding-top: 0px;">Jan 2021 - July 2022<br><br></span></div>
-               </div>
-               <p class="experience-text">Designed and developed production level e-commerce and customer management websites using ReactJS and NodeJS for a top telecom client in the United States. Awarded the "Applause Award" for exceptional performance in a project through weekly deliverables and client demos. Collaborated on an application development effort for a client that reduced prepaid cellular activation times to 5 minutes and improved their play store ratings to 4.5 stars<br></p>
-            </div>
-            <div class="item" style="margin-top: 30px;padding-bottom: 2px;">
-               <div class="row company-header">
-                  <div class="col-md-6">
-                     <img src="assets/img/Bolologo.png" style="height: 80px;">
-                     <h3>BoloMeet</h3>
-                     <h1 style="font-size: 18px;">Data Science Intern</h1>
-                  </div>
-                  <div class="col-md-6" style="padding-top: 6px;margin: auto;"><span class="period" style="padding-top: 0px;">June 2020 - July 2020<br><br></span></div>
-               </div>
-               <p class="experience-text">Developed a feature for the video conferencing application BoloMeet, wherein the minutes of the meeting and action points are automatically generated at the end of a meeting by using speech to text APIs, then leveraged natural language processing techniques to accurately identify relevant information and filter the raw speech to text data<br></p>
-            </div>
-            <div class="item" style="margin-top: 30px;">
-               <div class="row company-header">
-                  <div class="col-md-6">
-                     <img src="assets/img/virtual%20labs.png" style="height: 80px;">
-                     <h3>Virtual Labs, IIITH</h3>
-                     <h1 style="font-size: 18px;">Software development Intern</h1>
-                  </div>
-                  <div class="col-md-6" style="padding-top: 6px;margin: auto;"><span class="period" style="padding-top: 0px;">May 2019 - July 2019<br><br></span></div>
-               </div>
-               <p class="experience-text no-border-bottom">Contributed to the development of open source software in Virtual Labs under mentorship from the Institute. Virtual Labs is an initiative by the MHRD, Government of India, which provides remote access to engineering labs for students. I collaborated with other interns and developed the UI for a circuit and waveform simulator<br><br></p>
-            </div>
+   </aside>
+
+   <div class="topbar">
+      <button class="pill" id="gridOpen"><i class="fas fa-th-large"></i>&nbsp; All projects</button>
+   </div>
+   <button class="pill back" id="back">← About me</button>
+
+   <div class="hint">drag to spin · click a node · <kbd>←</kbd> <kbd>→</kbd> to travel · <kbd>esc</kbd> to return</div>
+
+   <section class="panel" id="panel" aria-live="polite">
+      <div class="panel-top">
+         <span class="kicker" id="pIdx"></span>
+         <button class="icon-btn" id="pClose" aria-label="Close"><i class="fas fa-times"></i></button>
+      </div>
+      <img id="pImg" alt="">
+      <h2 id="pTitle"></h2>
+      <div class="bits" id="pBits"></div>
+      <div class="tags" id="pTags"></div>
+      <p id="pDesc"></p>
+      <div class="links" id="pLinks"></div>
+      <div class="pnav">
+         <button id="pPrev"></button>
+         <button id="pNext"></button>
+      </div>
+   </section>
+
+   <div class="grid-overlay" id="grid">
+      <div class="grid-inner">
+         <div class="grid-head">
+            <span class="kicker">All projects</span>
+            <button class="icon-btn" id="gridClose" aria-label="Close"><i class="fas fa-times"></i></button>
          </div>
-      </section>
-      <section class="empty-section"></section>
-      <section id="skills" style="text-align: center;padding-top: 64px;background: #181818;padding-bottom: 34px;">
-         <h1 style="padding-bottom: 37px;color: #f8f8f8;font-size: 56px;">Skills</h1>
-         <div class="row" style="margin-right: auto;margin-left: auto;margin-bottom: 27px;">
-            <div class="col" style="min-width: 280px;">
-               <h1 style="color: #f8f8f8;font-size: 28px;">Python</h1>
-               <div>
-                  <img class="skill-icon" src="assets/img/icons/python.png"/>
-                  <img class="skill-icon" src="assets/img/icons/pyqt.png"/>
-               </div>
-            </div>
-            <div class="col" style="margin: auto;min-width: 200px;">
-               <div id="pythonskill"></div>
-            </div>
-         </div>
-         <div class="row" style="margin-right: auto;margin-left: auto;margin-bottom: 27px;">
-            <div class="col" style="min-width: 280px;">
-               <h1 style="color: #f8f8f8;font-size: 28px;">Java</h1>
-               <div>
-                  <img class="skill-icon" src="assets/img/icons/java.png"/>
-               </div>
-            </div>
-            <div class="col" style="margin: auto;min-width: 200px;">
-               <div id="jskill"></div>
-            </div>
-         </div>   
-         <div class="row" style="margin-right: auto;margin-left: auto;margin-bottom: 27px;">
-            <div class="col" style="min-width: 280px;">
-               <h1 style="color: #f8f8f8;font-size: 28px;">C/C++</h1>
-               <div>
-                  <img class="skill-icon" src="assets/img/icons/cplusplus.png"/>
-                  <img class="skill-icon" src="assets/img/icons/windows.png"/>
-               </div>
-            </div>
-            <div class="col" style="margin: auto;min-width: 200px;">
-               <div id="cskill"></div>
-            </div>
-         </div>
-         <div class="row" style="margin-right: auto;margin-left: auto;margin-bottom: 27px;">
-            <div class="col" style="min-width: 280px;">
-               <h1 style="color: #f8f8f8;font-size: 28px;">Web development</h1>
-               <div>
-                  <img class="skill-icon" src="assets/img/icons/react.png"/>
-                  <img class="skill-icon" src="assets/img/icons/node.png"/>
-                  <img class="skill-icon" src="assets/img/icons/mongodb.png"/>
-                  <img class="skill-icon" src="assets/img/icons/django.png"/>
-                  <img class="skill-icon" src="assets/img/icons/postgresql.png"/>
-                  <img class="skill-icon" src="assets/img/icons/redis.png"/>
-                  <img class="skill-icon" src="assets/img/icons/digitalocean.png"/>
-               </div>               
-            </div>
-            <div class="col" style="margin: auto;min-width: 200px;">
-               <div id="wskill"></div>
-            </div>
-         </div>
-         <div class="row" style="margin-right: auto;margin-left: auto;margin-bottom: 27px;">
-            <div class="col" style="min-width: 280px;">
-               <h1 style="color: #f8f8f8;font-size: 28px;">Machine learning</h1>
-               <div>
-                  <img class="skill-icon" src="assets/img/icons/tensorflow.png"/>
-                  <img class="skill-icon" src="assets/img/icons/pytorch.png"/>
-               </div>
-            </div>
-            <div class="col" style="margin: auto;min-width: 200px;">
-               <div id="mskill"></div>
-            </div>
-         </div>   
-         <div class="row" style="margin-right: auto;margin-left: auto;margin-bottom: 27px;">
-            <div class="col" style="min-width: 280px;">
-               <h1 style="color: #f8f8f8;font-size: 28px;">Android app development</h1>
-               <div>
-                  <img class="skill-icon" src="assets/img/icons/androidstudio.png"/>
-               </div>
-            </div>
-            <div class="col" style="margin: auto;min-width: 200px;">
-               <div id="askill"></div>
-            </div>
-         </div>
-         <div class="row" style="margin-right: auto;margin-left: auto;margin-bottom: 27px;">
-            <div class="col" style="min-width: 280px;">
-               <h1 style="color: #f8f8f8;font-size: 28px;">Computer Vision</h1>
-               <div>
-                  <img class="skill-icon" src="assets/img/icons/opencv.png"/>
-               </div>
-            </div>
-            <div class="col" style="margin: auto;min-width: 200px;">
-               <div id="cvskill"></div>
-            </div>
-         </div>      
-      </section>
-      <section class="empty-section"></section>
-      <section id="education" style="text-align: center;padding-top: 60px;padding-bottom: 30px;background: #181818;">
-         <div class="education group" style="text-align: center;">
-            <div class="heading">
-               <h2 class="text-center" style="font-size: 56px;padding-bottom: 49px;padding-top: 9px;color: #f8f8f8">Education</h2>
-            </div>
-            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 900px;border: 1px none rgba(0,0,0,0.55);border-bottom: 1px solid #f8f8f8;padding-top: 1px;padding-bottom: 25px;">
-               <div class="col-md-6" style="max-width: 600px;margin: auto;">
-                  <img src="assets/img/UCI.png" style="height: 80px;">
-                  <h3 style="color: #f8f8f8">University of California, Irvine</h3>
-                  <p style="text-align: center; color: #f8f8f8">Master's in Computer Science<br>GPA : 4.0/4.0<br></p>
-               </div>
-               <div class="col-md-6" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period">2023</span></div>
-            </div>
-            <div class="row" style="margin-left: auto;padding-top: 25px;margin-right: auto;max-width: 900px;border-width: 1px;border-style: none;border-bottom: 1px solid #f8f8f8;padding-bottom: 25px;">
-               <div class="col-md-6" style="max-width: 600px;margin: auto;">
-                  <img src="assets/img/Manipal_University_logo.png" style="height: 80px;">
-                  <h3 style="color: #f8f8f8">Manipal Institute Of Technology</h3>
-                  <p style="text-align: center; color: #f8f8f8">B.Tech - Computers and Communication Engineering<br>CGPA : 9.14/10<br></p>
-               </div>
-               <div class="col-md-6" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period">2021</span></div>
-            </div>
-            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 900px;border-width: 1px;border-style: none;padding-top: 25px;">
-               <div class="col-md-6" style="max-width: 600px;margin: auto;">
-                  <img src="assets/img/Deeksha.png" style="height: 80px;">
-                  <h3 style="color: #f8f8f8">Deeksha Integrated PU College</h3>
-                  <p style="text-align: center; color: #f8f8f8">12th - PCM and Computer Science<br>Percentage - 93.5%</p>
-               </div>
-               <div class="col-md-6" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period">2017</span></div>
-            </div>
-         </div>
-      </section>
-      <section class="empty-section"></section>
-      <section id="extracur" style="text-align: center;padding-top: 30px;background: #181818;padding-bottom: 30px;">
-         <div class="education group" style="text-align: center;">
-            <div class="heading">
-               <h2 class="text-center" style="font-size: 56px;padding-bottom: 46px;color: #f8f8f8;padding-top: 36px;width: auto;">Extracurricular</h2>
-            </div>
-            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 900px;padding-bottom: 25px;border: 1px none #f8f8f8 ;border-bottom-style: solid;">
-               <div class="col-md-6" style="max-width: 600px;margin: auto;">
-                  <h3 style="color: #f8f8f8;">Vice President,<br>The Astronomy Club</h3>
-               </div>
-               <div class="col-md-6" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period" style="color: #f8f8f8;">2017 - 2020</span></div>
-            </div>
-            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 900px;padding-top: 25px;padding-bottom: 25px;border: 1px none #f8f8f8 ;border-bottom-style: solid;">
-               <div class="col-md-6" style="max-width: 600px;margin: auto;">
-                  <h3 style="border-color: #f8f8f8;color: #f8f8f8;">Actor,<br>Naqaab Filmmaking</h3>
-               </div>
-               <div class="col-md-6" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period" style="color: #f8f8f8;">2018 - 2019</span></div>
-            </div>
-            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 900px;padding-top: 25px;padding-bottom: 25px;border: 1px none #f8f8f8 ;border-bottom-style: solid;">
-               <div class="col-md-6" style="max-width: 600px;margin: auto;">
-                  <h3 style="color: #f8f8f8;">Management Committee,<br>IEEE Student Body</h3>
-               </div>
-               <div class="col-md-6" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period" style="color: #f8f8f8;">2018 - 2019</span></div>
-            </div>
-            <div class="row" style="margin-left: auto;margin-right: auto;max-width: 900px;border-width: 1px;border-style: none;padding-top: 25px;padding-bottom: 25px;">
-               <div class="col-md-6" style="max-width: 600px;margin: auto;">
-                  <h3 style="color: #f8f8f8;">President,<br>Deeksha Integrated PU College</h3>
-               </div>
-               <div class="col-md-6" style="padding-top: 6px;max-width: 600px;margin: auto;"><span class="period" style="color: #f8f8f8;">2015 - 2016</span></div>
-            </div>
-         </div>
-      </section>
-      <section id="contact" style="text-align: center;padding-top: 20px;padding-bottom: 20px;padding-right: 0px; background-color: rgb(255,255,255,0.95)">
-         <h1 style="font-size: 56px;padding-top: 0px;text-align: center;">Contact</h1>
-         <p style="font-size: 20px;color: rgb(0,0,0);text-align: center;">utkarshchhapekar@outlook.com&nbsp;<a href="mailto: utkarshchhapekar@outlook.com"><i class="fa fa-envelope" style="color: rgb(0,0,0);"></i></a><br>Utkarsh Chhapekar&nbsp;<a href="https://www.facebook.com/utkarsh.chhapekar.9/"><i class="fa fa-facebook-square"></i></a><br>utkichaps&nbsp;<a href="https://www.instagram.com/utkichaps/" style="color: rgb(227,41,119);"><i class="fa fa-instagram"></i></a><br><i class="fab fa-rebel" style="font-size: 19px;margin-left: 2px;"></i></p>         
-      </section>      
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>      
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.1.0/progressbar.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>      
-      <script src="assets/js/script.min.js"></script>     
-   </body>
+         <div class="cards" id="cards"></div>
+      </div>
+   </div>
+
+   <script type="module">
+      import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+
+      const PROJECTS = [
+         {
+            slug: 'rhain', title: 'Project RHAIN', short: 'RHAIN', img: 'assets/img/rhain.png',
+            tags: ['Machine Learning', 'Healthcare', 'Analytics'],
+            desc: 'An intelligent healthcare analytics platform that leverages machine learning and statistical techniques to provide actionable insights and metrics for county health evaluation, aiming to improve healthcare policy decision-making and reduce wasteful expenditure.',
+            links: [['fas fa-link', 'Website', 'https://projectrhain.com'], ['fab fa-github', 'GitHub', 'https://github.com/orgs/Project-RHAIN/repositories']]
+         },
+         {
+            slug: 'voting-system', title: 'Voting System', short: 'VOTE', img: 'assets/img/voting-system.gif',
+            tags: ['Android', 'Face Detection', 'Published'],
+            desc: 'An android application which uses facial detection to ensure fraud free and secure voting. Made for the publication - Coercion Resistant Remote Electronic Voting, Engineered Science.',
+            links: [['fas fa-file-alt', 'Paper', 'https://www.espublisher.com/journals/articledetails/585'], ['fab fa-github', 'GitHub', 'https://github.com/Utkichaps/Voting-System']]
+         },
+         {
+            slug: 'disastron', title: 'Disastron', short: 'DISASTRON', img: 'assets/img/disastron.png',
+            tags: ['Crowdsourcing', 'Maps', 'APIs'],
+            desc: 'A crowd sourced disaster management application which provides real time weather maps through the OpenWeather API and notifications through the National Disaster Management Authority of India.',
+            links: [['fab fa-github', 'GitHub', 'https://github.com/Utkichaps/Disastron']]
+         },
+         {
+            slug: 'maze-duks', title: 'Maze DUKS', short: 'DUKS', img: 'assets/img/mazeduks.gif',
+            tags: ['Java', 'Game'],
+            desc: 'A Java based video game where you have to navigate to the end of the maze. It contains many game modes to choose from, and multiple options to play with.',
+            links: [['fab fa-github', 'GitHub', 'https://github.com/Utkichaps/Maze-DUKS']]
+         },
+         {
+            slug: 'hal-mimic-2', title: 'HAL-Mimic 2.0', short: 'HAL 2.0', img: 'assets/img/hal_mimic_2.gif',
+            tags: ['NLP', 'Seq2Seq', 'Attention'],
+            desc: 'An improvement over my previous chatbot, this one uses an encoder-decoder architecture along with an attention layer to provide more accurate responses based on your Whatsapp data.',
+            links: [['fab fa-github', 'GitHub', 'https://github.com/Utkichaps/HAL-Mimic-2.0']]
+         },
+         {
+            slug: 'hal-mimic', title: 'HAL-Mimic', short: 'HAL', img: 'assets/img/chatbot.png',
+            tags: ['NLP', 'Bi-LSTM'],
+            desc: 'A chatbot that trains itself on your Whatsapp chat history and learns to reply as you would reply in a text conversation. The model uses two bi-directional LSTMs.',
+            links: [['fab fa-github', 'GitHub', 'https://github.com/Utkichaps/HAL-Mimic']]
+         },
+         {
+            slug: 'roomway', title: 'Roomway', short: 'ROOMWAY', img: 'assets/img/roomway.png',
+            tags: ['Django', 'Postgres', 'Redis', 'Celery'],
+            desc: 'A social network that allows people to easily and effectively find new roommates or flatmates through a personality based recommendation system. Developed using Django, Postgres, Redis and Celery.',
+            links: []
+         },
+         {
+            slug: 'stonks', title: 'Stonks', short: 'STONKS', img: 'assets/img/stonks.png',
+            tags: ['Sentiment Analysis', 'Time Series'],
+            desc: 'An application that combines the use of Twitter sentiment analysis and time series data prediction to forecast stock market prices on a given day.',
+            links: [['fab fa-github', 'GitHub', 'https://github.com/Utkichaps/Stonks']]
+         },
+         {
+            slug: 'alzheimers', title: "Alzheimer's Prediction", short: 'ALZ', img: 'assets/img/Alzheimer%27s.png',
+            tags: ['Multimodal NN', 'Healthcare'],
+            desc: "Implementation of a paper published in the Nature journal that uses multi-modal neural networks to predict the progression of Alzheimer's disease in patients.",
+            links: []
+         }
+      ];
+      const N = PROJECTS.length;
+      const ACCENT = 0xffffff;
+      const R = 1.6;
+      const NODE_LIFT = 1.07;
+
+      // ---------- Renderer / scene ----------
+      const stage = document.getElementById('stage');
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+      renderer.setClearColor(0x05070b);
+      stage.appendChild(renderer.domElement);
+      const canvas = renderer.domElement;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 200);
+      let camZ = 9;
+      camera.position.set(0, 0, camZ);
+
+      const world = new THREE.Group();   // shifted horizontally to sit beside the intro / panel
+      const globe = new THREE.Group();   // rotated by the user
+      world.add(globe);
+      scene.add(world);
+
+      function radialTexture(stops) {
+         const c = document.createElement('canvas');
+         c.width = c.height = 128;
+         const g = c.getContext('2d');
+         const grad = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+         stops.forEach(([o, col]) => grad.addColorStop(o, col));
+         g.fillStyle = grad;
+         g.fillRect(0, 0, 128, 128);
+         const t = new THREE.CanvasTexture(c);
+         t.colorSpace = THREE.SRGBColorSpace;
+         return t;
+      }
+      const dotTex = radialTexture([[0, '#fff'], [.42, '#fff'], [.55, 'rgba(255,255,255,0)'], [1, 'rgba(255,255,255,0)']]);
+      const haloTex = radialTexture([[0, 'rgba(255,255,255,1)'], [.18, 'rgba(255,255,255,.55)'], [1, 'rgba(255,255,255,0)']]);
+
+      function fibonacci(n, i, yMax = 1) {
+         const y = yMax * (1 - 2 * (i + .5) / n);
+         const r = Math.sqrt(1 - y * y);
+         const th = i * Math.PI * (3 - Math.sqrt(5));
+         return new THREE.Vector3(Math.cos(th) * r, y, Math.sin(th) * r);
+      }
+
+      // ---------- Starfield ----------
+      const starGeo = new THREE.BufferGeometry();
+      const starPos = [];
+      for (let i = 0; i < 2200; i++) {
+         const v = new THREE.Vector3().randomDirection().multiplyScalar(40 + Math.random() * 40);
+         starPos.push(v.x, v.y, v.z);
+      }
+      starGeo.setAttribute('position', new THREE.Float32BufferAttribute(starPos, 3));
+      const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({
+         size: .45, map: dotTex, transparent: true, opacity: .75, depthWrite: false, color: 0xcfe3ff
+      }));
+      scene.add(stars);
+
+      // ---------- Globe ----------
+      world.add(new THREE.Mesh(
+         new THREE.SphereGeometry(R * .985, 64, 64),
+         new THREE.MeshBasicMaterial({ color: 0x070b10 })
+      ));
+      world.add(new THREE.Mesh(
+         new THREE.SphereGeometry(R * 1.005, 64, 64),
+         new THREE.ShaderMaterial({
+            transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+            uniforms: { color: { value: new THREE.Color(ACCENT) } },
+            vertexShader: `
+               varying vec3 vN; varying vec3 vV;
+               void main() {
+                  vec4 mv = modelViewMatrix * vec4(position, 1.0);
+                  vN = normalize(normalMatrix * normal);
+                  vV = normalize(-mv.xyz);
+                  gl_Position = projectionMatrix * mv;
+               }`,
+            fragmentShader: `
+               uniform vec3 color; varying vec3 vN; varying vec3 vV;
+               void main() {
+                  float f = pow(1.0 - max(dot(vN, vV), 0.0), 3.0);
+                  gl_FragColor = vec4(color * f * .8, f);
+               }`
+         })
+      ));
+
+      const dotPos = [];
+      for (let i = 0; i < 1800; i++) {
+         const v = fibonacci(1800, i).multiplyScalar(R);
+         dotPos.push(v.x, v.y, v.z);
+      }
+      const dotGeo = new THREE.BufferGeometry();
+      dotGeo.setAttribute('position', new THREE.Float32BufferAttribute(dotPos, 3));
+      globe.add(new THREE.Points(dotGeo, new THREE.PointsMaterial({
+         size: .06, map: dotTex, color: ACCENT, transparent: true, opacity: .5, depthWrite: false
+      })));
+      globe.add(new THREE.LineSegments(
+         new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(R * 1.001, 2)),
+         new THREE.LineBasicMaterial({ color: ACCENT, transparent: true, opacity: .06, depthWrite: false })
+      ));
+
+      // ---------- Project nodes ----------
+      const nodes = PROJECTS.map((p, i) => {
+         const dir = fibonacci(N, i, .78);
+         const group = new THREE.Group();
+         group.position.copy(dir).multiplyScalar(R * NODE_LIFT);
+         const halo = new THREE.Sprite(new THREE.SpriteMaterial({
+            map: haloTex, color: ACCENT, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending
+         }));
+         halo.scale.setScalar(.45);
+         halo.userData.index = i;
+         const core = new THREE.Sprite(new THREE.SpriteMaterial({ map: dotTex, color: 0xffffff, transparent: true, depthWrite: false }));
+         core.scale.setScalar(.085);
+         group.add(halo, core);
+         const pin = new THREE.Line(
+            new THREE.BufferGeometry().setFromPoints([dir.clone().multiplyScalar(R), dir.clone().multiplyScalar(R * NODE_LIFT)]),
+            new THREE.LineBasicMaterial({ color: ACCENT, transparent: true, opacity: .5 })
+         );
+         globe.add(group, pin);
+         return { dir, group, halo };
+      });
+
+      // Constellation arcs linking projects in order: the path ← / → travels along
+      const arcs = nodes.map((n, i) => {
+         const a = n.dir, b = nodes[(i + 1) % N].dir;
+         const pts = [];
+         for (let k = 0; k <= 48; k++) {
+            const t = k / 48;
+            const v = a.clone().lerp(b, t).normalize();
+            pts.push(v.multiplyScalar(R * (NODE_LIFT + Math.sin(Math.PI * t) * .12)));
+         }
+         const line = new THREE.Line(
+            new THREE.BufferGeometry().setFromPoints(pts),
+            new THREE.LineBasicMaterial({ color: ACCENT, transparent: true, opacity: .14, depthWrite: false })
+         );
+         globe.add(line);
+         return line;
+      });
+
+      // ---------- Binary rings ----------
+      class BitRing {
+         constructor({ radius, height, tilt, speed, cells, repeat, rgb, opacity }) {
+            this.cells = cells;
+            this.cw = 32;
+            this.rgb = rgb;
+            this.speed = speed;
+            this.canvas = document.createElement('canvas');
+            this.canvas.width = cells * this.cw;
+            this.canvas.height = 64;
+            this.ctx = this.canvas.getContext('2d');
+            this.bits = Array.from({ length: cells }, () => (Math.random() < .5 ? '0' : '1'));
+            this.alpha = Array.from({ length: cells }, () => 0.12 + Math.random() * .4);
+            this.hot = new Array(cells).fill(false);
+            this.target = null;
+            this.lastTick = 0;
+
+            this.tex = new THREE.CanvasTexture(this.canvas);
+            this.tex.wrapS = THREE.RepeatWrapping;
+            this.tex.repeat.x = repeat;
+            this.tex.colorSpace = THREE.SRGBColorSpace;
+            this.tex.anisotropy = 8;
+            this.mesh = new THREE.Mesh(
+               new THREE.CylinderGeometry(radius, radius, height, 256, 1, true),
+               new THREE.MeshBasicMaterial({
+                  map: this.tex, transparent: true, opacity, side: THREE.DoubleSide,
+                  depthWrite: false, blending: THREE.AdditiveBlending
+               })
+            );
+            this.group = new THREE.Group();
+            this.group.rotation.set(tilt[0], 0, tilt[1]);
+            this.group.add(this.mesh);
+            this.draw();
+         }
+         decode(pattern, now) {
+            this.target = pattern;
+            this.switchAt = Array.from({ length: this.cells }, () => now + Math.random() * 800);
+            this.hot.fill(false);
+         }
+         scramble() {
+            this.target = null;
+            this.hot.fill(false);
+         }
+         update(dt, now) {
+            this.mesh.rotation.y += this.speed * dt;
+            if (now - this.lastTick < 70) return;
+            this.lastTick = now;
+            for (let i = 0; i < this.cells; i++) {
+               if (this.target && now >= this.switchAt[i]) {
+                  this.bits[i] = this.target[i];
+                  this.hot[i] = true;
+               } else if (Math.random() < .05) {
+                  this.bits[i] = Math.random() < .5 ? '0' : '1';
+               }
+               if (Math.random() < .08) this.alpha[i] = 0.12 + Math.random() * .4;
+            }
+            this.draw();
+         }
+         draw() {
+            const { ctx, cw } = this;
+            ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            ctx.font = '600 40px "JetBrains Mono", monospace';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            for (let i = 0; i < this.cells; i++) {
+               if (this.bits[i] === ' ') continue;
+               ctx.fillStyle = this.hot[i] ? 'rgba(255,255,255,1)' : `rgba(${this.rgb},${this.alpha[i]})`;
+               ctx.fillText(this.bits[i], i * cw + cw / 2, 34);
+            }
+            this.tex.needsUpdate = true;
+         }
+      }
+
+      const mainRing = new BitRing({ radius: 2.55, height: .2, tilt: [.38, -.28], speed: .09, cells: 128, repeat: 2, rgb: '255,255,255', opacity: 1 });
+      world.add(mainRing.group);
+      const rings = [mainRing];
+
+      function toBinary(str) {
+         return [...str].map(ch => ch.charCodeAt(0).toString(2).padStart(8, '0'));
+      }
+      function ringPattern(str, cells) {
+         const unit = toBinary(str).join(' ') + '    ';
+         return unit.repeat(Math.ceil(cells / unit.length)).slice(0, cells);
+      }
+
+      // ---------- Layout ----------
+      const INTRO_W = 440, PANEL_W = 420 + 24, MOBILE_BP = 760;
+      const GLOBE_W = 5.8, GLOBE_H = 4.2;   // world-space footprint of globe + ring that must stay on screen
+      const panelEl = document.getElementById('panel');
+      const unitsPerPx = z => 2 * z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) / innerHeight;
+
+      // Free screen region for the globe: x0..x1 / y0..y1 in px
+      function freeArea(exploring) {
+         const W = innerWidth, H = innerHeight;
+         if (W <= MOBILE_BP) {
+            return exploring ? { x0: 0, x1: W, y0: 56, y1: H - panelEl.offsetHeight - 10 } : { x0: 0, x1: W, y0: 0, y1: H };
+         }
+         return exploring ? { x0: 0, x1: W - PANEL_W, y0: 0, y1: H } : { x0: INTRO_W, x1: W, y0: 0, y1: H };
+      }
+      // Camera distance and globe offset so the globe sits centred in the free area and fits inside it
+      function layout(exploring) {
+         const a = freeArea(exploring);
+         const k = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) / innerHeight;
+         const fitZ = Math.max(GLOBE_W / ((a.x1 - a.x0) * k), GLOBE_H / ((a.y1 - a.y0) * k));
+         const z = Math.max(exploring ? 8.3 : 9, fitZ);
+         const upp = unitsPerPx(z);
+         return {
+            z,
+            x: ((a.x0 + a.x1) / 2 - innerWidth / 2) * upp,
+            y: -((a.y0 + a.y1) / 2 - innerHeight / 2) * upp
+         };
+      }
+      function resize() {
+         renderer.setSize(innerWidth, innerHeight);
+         camera.aspect = innerWidth / innerHeight;
+         camera.updateProjectionMatrix();
+      }
+      addEventListener('resize', resize);
+      resize();
+      {
+         const l = layout(false);
+         camZ = l.z;
+         world.position.set(l.x, l.y, 0);
+      }
+
+      // ---------- Interaction ----------
+      let current = -1, hovered = -1, targetQ = null;
+      let dragging = false, moved = 0, lastX = 0, lastY = 0, velX = 0, velY = 0;
+      const AXIS_X = new THREE.Vector3(1, 0, 0), AXIS_Y = new THREE.Vector3(0, 1, 0);
+      const tmpQ = new THREE.Quaternion(), tmpV = new THREE.Vector3(), tmpN = new THREE.Vector3();
+      const raycaster = new THREE.Raycaster();
+      const pointer = new THREE.Vector2();
+
+      function rotateBy(yaw, pitch) {
+         globe.quaternion.premultiply(tmpQ.setFromAxisAngle(AXIS_Y, yaw));
+         globe.quaternion.premultiply(tmpQ.setFromAxisAngle(AXIS_X, pitch));
+      }
+      // How directly a world-space point on the globe faces the camera (1 = head on, <0 = behind)
+      function facing(worldPos) {
+         tmpN.copy(worldPos).sub(world.position).normalize();
+         return tmpN.dot(tmpV.copy(camera.position).sub(worldPos).normalize());
+      }
+      function pick(x, y) {
+         pointer.set(x / innerWidth * 2 - 1, -(y / innerHeight) * 2 + 1);
+         raycaster.setFromCamera(pointer, camera);
+         for (const hit of raycaster.intersectObjects(nodes.map(n => n.halo))) {
+            const wp = hit.object.getWorldPosition(new THREE.Vector3());
+            if (facing(wp) > .1) return hit.object.userData.index;
+         }
+         return -1;
+      }
+
+      canvas.addEventListener('pointerdown', e => {
+         dragging = true; moved = 0; lastX = e.clientX; lastY = e.clientY; velX = velY = 0;
+         canvas.setPointerCapture(e.pointerId);
+      });
+      canvas.addEventListener('pointermove', e => {
+         if (!dragging) {
+            hovered = pick(e.clientX, e.clientY);
+            canvas.style.cursor = hovered >= 0 ? 'pointer' : 'grab';
+            return;
+         }
+         const dx = e.clientX - lastX, dy = e.clientY - lastY;
+         lastX = e.clientX; lastY = e.clientY;
+         moved += Math.abs(dx) + Math.abs(dy);
+         if (moved > 4) {
+            targetQ = null;
+            canvas.style.cursor = 'grabbing';
+            rotateBy(dx * .006, dy * .006);
+            velX = dx * .36; velY = dy * .36;
+         }
+      });
+      canvas.addEventListener('pointerup', e => {
+         dragging = false;
+         canvas.style.cursor = 'grab';
+         if (moved <= 4) {
+            const i = pick(e.clientX, e.clientY);
+            if (i >= 0) select(i);
+         }
+      });
+
+      // ---------- Labels ----------
+      const labelsEl = document.getElementById('labels');
+      nodes.forEach((n, i) => {
+         const el = document.createElement('button');
+         el.className = 'label';
+         el.innerHTML = `<span class="idx">${String(i + 1).padStart(2, '0')}</span>${PROJECTS[i].title}`;
+         el.addEventListener('click', () => select(i));
+         el.addEventListener('mouseenter', () => { hovered = i; });
+         el.addEventListener('mouseleave', () => { hovered = -1; });
+         labelsEl.appendChild(el);
+         n.label = el;
+      });
+      function updateLabels() {
+         const v = new THREE.Vector3();
+         nodes.forEach((n, i) => {
+            n.group.getWorldPosition(v);
+            const opacity = THREE.MathUtils.smoothstep(facing(v), .05, .35) * (i === current ? 0 : 1);
+            v.project(camera);
+            const x = (v.x + 1) / 2 * innerWidth, y = (1 - v.y) / 2 * innerHeight;
+            n.label.style.transform = `translate(${x + 16}px, ${y}px) translateY(-50%)`;
+            n.label.style.opacity = opacity;
+            n.label.style.pointerEvents = opacity > .5 ? 'auto' : 'none';
+            n.label.classList.toggle('hot', i === hovered);
+         });
+      }
+
+      // ---------- Panel ----------
+      const $ = id => document.getElementById(id);
+      function fillPanel(i) {
+         const p = PROJECTS[i];
+         const prev = PROJECTS[(i - 1 + N) % N], next = PROJECTS[(i + 1) % N];
+         $('pIdx').textContent = `Project ${String(i + 1).padStart(2, '0')} / ${String(N).padStart(2, '0')}`;
+         $('pImg').src = p.img;
+         $('pImg').alt = p.title;
+         $('pTitle').textContent = p.title;
+         $('pBits').innerHTML = `<b>${p.short}</b> = ${toBinary(p.short).join(' ')}`;
+         $('pTags').innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+         $('pDesc').textContent = p.desc;
+         $('pLinks').innerHTML = p.links.map(([icon, text, href]) =>
+            `<a href="${href}" target="_blank" rel="noopener"><i class="${icon}"></i>${text}</a>`).join('');
+         $('pPrev').innerHTML = `<small>← prev</small>${prev.title}`;
+         $('pNext').innerHTML = `<small>next →</small>${next.title}`;
+      }
+
+      function select(i) {
+         i = (i + N) % N;
+         current = i;
+         document.body.classList.add('exploring');
+         fillPanel(i);
+         const l = layout(true);
+         const toCamera = new THREE.Vector3(-l.x, -l.y, l.z).normalize();
+         const nodeDir = nodes[i].dir.clone().applyQuaternion(globe.quaternion);
+         targetQ = new THREE.Quaternion().setFromUnitVectors(nodeDir, toCamera).multiply(globe.quaternion);
+         mainRing.decode(ringPattern(PROJECTS[i].short, mainRing.cells), performance.now());
+         arcs.forEach((a, k) => { a.material.opacity = (k === i || k === (i - 1 + N) % N) ? .55 : .1; });
+         history.replaceState(null, '', '#' + PROJECTS[i].slug);
+      }
+      function closeProject() {
+         current = -1;
+         targetQ = null;
+         document.body.classList.remove('exploring');
+         mainRing.scramble();
+         arcs.forEach(a => { a.material.opacity = .14; });
+         history.replaceState(null, '', location.pathname);
+      }
+
+      $('explore').addEventListener('click', () => select(0));
+      $('pClose').addEventListener('click', closeProject);
+      $('back').addEventListener('click', closeProject);
+      $('pPrev').addEventListener('click', () => select(current - 1));
+      $('pNext').addEventListener('click', () => select(current + 1));
+      addEventListener('keydown', e => {
+         if ($('grid').classList.contains('open')) {
+            if (e.key === 'Escape') $('grid').classList.remove('open');
+            return;
+         }
+         if (e.key === 'ArrowRight') select(current < 0 ? 0 : current + 1);
+         else if (e.key === 'ArrowLeft') select(current < 0 ? N - 1 : current - 1);
+         else if (e.key === 'Escape' && current >= 0) closeProject();
+      });
+
+      // ---------- All projects grid ----------
+      $('cards').innerHTML = PROJECTS.map((p, i) => `
+         <button class="card" data-i="${i}">
+            <img src="${p.img}" alt="${p.title}" loading="lazy">
+            <h3>${p.title}</h3>
+            <span>${p.tags.join(' · ')}</span>
+         </button>`).join('');
+      $('cards').addEventListener('click', e => {
+         const card = e.target.closest('.card');
+         if (!card) return;
+         $('grid').classList.remove('open');
+         select(+card.dataset.i);
+      });
+      $('gridOpen').addEventListener('click', () => $('grid').classList.add('open'));
+      $('gridClose').addEventListener('click', () => $('grid').classList.remove('open'));
+
+      // Deep link: #slug opens that project
+      const linked = PROJECTS.findIndex(p => '#' + p.slug === location.hash);
+      if (linked >= 0) {
+         select(linked);
+         globe.quaternion.copy(targetQ);
+         const l = layout(true);
+         camZ = l.z;
+         world.position.set(l.x, l.y, 0);
+      }
+
+      // ---------- Loop ----------
+      const clock = new THREE.Clock();
+      function frame() {
+         const dt = Math.min(clock.getDelta(), .05);
+         const now = performance.now();
+         const exploring = current >= 0;
+
+         if (targetQ) {
+            globe.quaternion.slerp(targetQ, 1 - Math.exp(-dt * 3.5));
+         } else if (!dragging) {
+            velX *= Math.exp(-dt * 2.5);
+            velY *= Math.exp(-dt * 2.5);
+            rotateBy((velX + (exploring ? 0 : .07)) * dt, velY * dt);
+         }
+
+         const l = layout(exploring), ease = 1 - Math.exp(-dt * 3);
+         camZ += (l.z - camZ) * ease;
+         camera.position.z = camZ;
+         world.position.x += (l.x - world.position.x) * ease;
+         world.position.y += (l.y - world.position.y) * ease;
+
+         rings.forEach(r => r.update(dt, now));
+         stars.rotation.y += dt * .004;
+
+         nodes.forEach((n, i) => {
+            const base = i === current ? .8 : i === hovered ? .62 : .45;
+            const s = base * (1 + .08 * Math.sin(now * .003 + i * 1.7));
+            n.halo.scale.setScalar(n.halo.scale.x + (s - n.halo.scale.x) * .2);
+            n.halo.material.color.setHex(i === current ? 0xffffff : ACCENT);
+         });
+
+         renderer.render(scene, camera);
+         updateLabels();
+         requestAnimationFrame(frame);
+      }
+      frame();
+   </script>
+</body>
 </html>
